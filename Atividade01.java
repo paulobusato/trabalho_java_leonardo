@@ -3,6 +3,16 @@ import java.util.ArrayList;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 
+/*
+a) Deverão ser passadas as seguintes informações para o cálculo do total da compra:
+nome do produto, valor unitário e quantidade comparada;
+b) Se pago à vista: desconto de 5% no total da compra,
+neste caso, o programa deverá calcular o troco do cliente.
+c) Se pago no débito: valor total sem acréscimo nem desconto;
+d) Se pago no crédito: acréscimo de 1% no total da compra;
+e) O arquivo gerado deverá se chamar totalPedido.txt 
+*/
+
 public class Atividade01 {
 	public static Scanner entrada = new Scanner(System.in).useDelimiter("\\n");
 	public static ArrayList<String> produtos = new ArrayList<>();
@@ -10,9 +20,9 @@ public class Atividade01 {
 	public static ArrayList<Double> quantidade = new ArrayList<>();
 
 	public static void clearScreen() {  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
-	}  
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+	}
 
 	public static int mostrarMenuPrincipal() {
 		if (produtos.size() == 0) {
@@ -40,6 +50,67 @@ public class Atividade01 {
 		System.out.println("");
 		System.out.print("* Opção: ");
 		return entrada.nextInt();
+	}
+
+	public static int mostrarFormasPagamento() {
+		System.out.println("\n** Menu Principal > Receber ***");
+		System.out.println("* 1 - Dinheiro          (-5%) *");
+		System.out.println("* 2 - Cartão de Débito        *");
+		System.out.println("* 3 - Cartão de Crédito (+1%) *");
+		System.out.println("* 4 - Retornar ao menu        *");
+		System.out.println("");
+		System.out.print("* Opção: ");
+		return entrada.nextInt();
+	}
+
+	public static void mostrarCaixa(int idPagamento) {
+		String descPagamento = "";
+		double totalPedido = CalcularTotalPedido();
+		double valorPago = 0;
+		double descontoAcrescimo = 0;
+		switch (idPagamento) {
+			case 1:
+				descPagamento = "Dinheiro";
+				descontoAcrescimo = 0.95;
+				break;
+			case 2:
+				descPagamento = "Cartão de Débito";
+				break;
+			case 3:
+					descPagamento = "Cartão de Crédito";
+					descontoAcrescimo = 1.01;
+					break;
+			default:
+				break;
+		}
+		System.out.println("\n** Menu Principal > Receber > Caixa");
+		System.out.println("* Forma de pagamento: " + descPagamento);
+		System.out.printf("*       Total Pedido: R$ %10.2f\n", totalPedido);
+		System.out.printf("*       Total Líqudo: R$ %10.2f\n", (totalPedido * descontoAcrescimo));
+		System.out.print("*         Valor pago: R$       ");
+		valorPago = entrada.nextDouble();
+		System.out.printf("*              Troco: R$ %10.2f\n", ((totalPedido * descontoAcrescimo) - valorPago));
+	
+		System.out.print("Deseja realmente fechar o pedido? (s/n): ");
+		String fecharPedido = entrada.next();
+
+		if (fecharPedido.equals("s")) {
+			System.out.println("Pedido fechado com sucesso com sucesso.");
+			System.out.print("\nPressione qualquer tecla para imprimir o comprovante...");
+			entrada.next();
+		} else {
+			System.out.println("Operação cancelada. O pedido não foi fechado.");
+			System.out.print("\nPressione qualquer tecla para continuar...");
+			entrada.next();
+		}
+	}
+
+	public static double CalcularTotalPedido() {
+		double soma = 0;
+		for(int i = 0; i < produtos.size(); i ++){
+			soma += valorUnitario.get(i) * quantidade.get(i);
+		}
+		return soma;
 	}
 
 	public static void inserirProduto(){
@@ -149,14 +220,18 @@ public class Atividade01 {
 								excluirProduto();
 								break;
 							default:
+								System.out.println("Opção inválida.");
 								break;
 						}
 					} while (opcaoMenuPedido != 4);
 					break;
 				case 2:
-						excluirPedido();
+					excluirPedido();
 					break;
 				case 3:
+					clearScreen();
+					int opcaoFormasPagamento = mostrarFormasPagamento();
+					mostrarCaixa(opcaoFormasPagamento);
 					break;
 				case 4:
 					System.out.println("Saindo do sistema...");
