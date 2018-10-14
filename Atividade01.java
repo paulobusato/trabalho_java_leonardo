@@ -32,11 +32,11 @@ public class Atividade01 {
 	}
 
 	public static int mostrarMenuPedido() {
-		System.out.println("\n***** Menu Pedido *****");
-		System.out.println("* 1 - Inserir produto *");
-		System.out.println("* 2 - Alterar produto *");
-		System.out.println("* 3 - Excluir produto *");
-		System.out.println("* 4 - Encerrar pedido *");
+		System.out.println("\n* Menu Principal > Pedido *");
+		System.out.println("* 1 - Inserir produto     *");
+		System.out.println("* 2 - Alterar produto     *");
+		System.out.println("* 3 - Excluir produto     *");
+		System.out.println("* 4 - Encerrar pedido     *");
 		System.out.println("");
 		System.out.print("* Opção: ");
 		return entrada.nextInt();
@@ -101,25 +101,36 @@ public class Atividade01 {
 		System.out.println("O pedido será excluído.");
 		System.out.println("");
 		listarProdutos();
-		
-		for(int i = 0; i < produtos.size(); i++){
-			produtos.remove(0);
-			valorUnitario.remove(0);
-			quantidade.remove(0);
+
+		System.out.print("Deseja realmente excluir o pedido selecionado? (s/n): ");
+		String excluirPedido = entrada.next();
+
+		if (excluirPedido.equals("s")) {
+			for(int i = 0; i < produtos.size(); i++){
+				produtos.remove(0);
+				valorUnitario.remove(0);
+				quantidade.remove(0);
+			}
+			System.out.println("Pedido removido com sucesso.");
+		} else {
+			System.out.println("Operação cancelada. O pedido não foi excluído.");
 		}
 
-		System.out.println("Produto removido com sucesso.");
+		System.out.print("\nPressione qualquer tecla para continuar...");
+		entrada.next();	
 	}
 
 	public static void main(String[] args) {
 		int opcaoMenuPrincipal;
 		do {
+			clearScreen();
 			opcaoMenuPrincipal =  mostrarMenuPrincipal();
 
 			switch (opcaoMenuPrincipal) {
 				case 1:
 					int opcaoMenuPedido;
 					do {
+						clearScreen();
 						if (produtos.size() > 0) {
 							listarProdutos();
 						}
@@ -127,11 +138,13 @@ public class Atividade01 {
 						switch (opcaoMenuPedido) {
 							case 1:
 								inserirProduto();
+								listarProdutos();
 								break;
 							case 2:
 								alterarProduto();
 								break;
 							case 3:
+								clearScreen();
 								listarProdutos();
 								excluirProduto();
 								break;
