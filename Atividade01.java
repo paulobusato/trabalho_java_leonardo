@@ -44,7 +44,7 @@ public class Atividade01 {
 
 	public static void inserirProduto(){
 		System.out.println("");
-		System.out.println("*********** Inserindo produto ***********");
+		System.out.println("********** Inserindo produto ***********");
 		System.out.print("    Descrição: ");
 		produtos.add(entrada.next());
 		System.out.print("Vlr. Unitário: ");
