@@ -1,16 +1,18 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Atividade02 {
-    public static void main(String[] args) {
-        ArrayList<Integer> inteiros = new ArrayList<>();
-
-        inteiros.add(1);
-        inteiros.add(2);
-        inteiros.add(3);
-
-        System.out.println(inteiros.remove(2));
-        System.out.println(inteiros.remove(1));
-        System.out.println(inteiros.remove(0));
-    }
+	public static void main(String[] args) {
+		try {
+			FileWriter dirArquivo = new FileWriter("../nome.txt");
+			PrintWriter arquivo = new PrintWriter(dirArquivo);
+			arquivo.print("Helllo");
+			arquivo.close();
+		} catch (Exception e) {
+			//TODO: handle exception
+		}
+	}
 }

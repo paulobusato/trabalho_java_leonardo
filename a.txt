@@ -1,7 +1,1 @@
-******* Menu *********
-* 1 - Iniciar pedido *
-* 2 - Listar pedido  *
-* 3 - Excluir pedido *
-* 4 - Sair           *
-*                    *
-* Opção: 
+

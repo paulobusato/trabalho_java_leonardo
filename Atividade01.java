@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.PrintWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 
 /*
 a) Deverão ser passadas as seguintes informações para o cálculo do total da compra:
@@ -65,7 +66,7 @@ public class Atividade01 {
 
 	public static void mostrarCaixa(int idPagamento) {
 		String descPagamento = "";
-		double totalPedido = CalcularTotalPedido();
+		double totalPedido = calcularTotalPedido();
 		double valorPago = 0;
 		double descontoAcrescimo = 0;
 		switch (idPagamento) {
@@ -98,6 +99,7 @@ public class Atividade01 {
 			System.out.println("Pedido fechado com sucesso com sucesso.");
 			System.out.print("\nPressione qualquer tecla para imprimir o comprovante...");
 			entrada.next();
+			imprimirPedido(descPagamento, totalPedido, valorPago, descontoAcrescimo);
 		} else {
 			System.out.println("Operação cancelada. O pedido não foi fechado.");
 			System.out.print("\nPressione qualquer tecla para continuar...");
@@ -105,7 +107,34 @@ public class Atividade01 {
 		}
 	}
 
-	public static double CalcularTotalPedido() {
+	public static void imprimirPedido(String descPagamento, double totalPedido, double valorPago, double descontoAcrescimo) {
+		try {
+			FileWriter dirArquivo = new FileWriter("totalPedido.txt");
+			PrintWriter arquivo = new PrintWriter(dirArquivo);
+			arquivo.println("\n*************************** RESUMO DO PEDIDO ***************************");
+			arquivo.println("\n************************************************************************");
+			arquivo.println("* Indice | Descrição                      | Vlr. Unitário | Quantidade *");
+			for(int i = 0; i < produtos.size(); i++){
+				arquivo.printf("* %6d | %-30S | R$ %10.2f | %10.2f *\n", i+1, produtos.get(i), valorUnitario.get(i), quantidade.get(i));
+			}
+			arquivo.println("*                                                                      *");
+			arquivo.println("************************************************************************");
+			arquivo.println("");
+			arquivo.println("************************************************************************");
+			arquivo.printf("*                                Forma de pagamento: %-17S *\n", descPagamento);
+			arquivo.printf("*                                      Total Pedido: R$ %14.2f *\n", totalPedido);
+			arquivo.printf("*                                      Total Líqudo: R$ %14.2f *\n", (totalPedido * descontoAcrescimo));
+			arquivo.printf("*                                        Valor pago: R$ %14.2f *\n", valorPago);
+			arquivo.printf("*                                             Troco: R$ %14.2f *\n", ((totalPedido * descontoAcrescimo) - valorPago));
+			arquivo.println("************************************************************************");
+
+			arquivo.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public static double calcularTotalPedido() {
 		double soma = 0;
 		for(int i = 0; i < produtos.size(); i ++){
 			soma += valorUnitario.get(i) * quantidade.get(i);
