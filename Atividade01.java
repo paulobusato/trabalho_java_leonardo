@@ -190,10 +190,11 @@ public class Atividade01 {
 	public static void excluirProduto(){
 		System.out.print("Digite o indice do produto a ser excluído: ");
 		int indice = entrada.nextInt() - 1;
+		String nomeProduto = produtos.get(indice);
 		produtos.remove(indice);
 		valorUnitario.remove(indice);
 		quantidade.remove(indice);
-		System.out.printf("\nO produto %d - %S foi excluído com sucesso.\n", indice + 1, produtos.get(indice));
+		System.out.printf("\nO produto %d - %S foi excluído com sucesso.\n", indice + 1, nomeProduto);
 	}
 
 	public static void excluirPedido(){
