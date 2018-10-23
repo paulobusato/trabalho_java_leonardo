@@ -89,9 +89,16 @@ public class Atividade01 {
 		System.out.println("* Forma de pagamento: " + descPagamento);
 		System.out.printf("*       Total Pedido: R$ %10.2f\n", totalPedido);
 		System.out.printf("*       Total Líqudo: R$ %10.2f\n", (totalPedido * descontoAcrescimo));
-		System.out.print("*         Valor pago: R$       ");
-		valorPago = entrada.nextDouble();
-		System.out.printf("*              Troco: R$ %10.2f\n", ((totalPedido * descontoAcrescimo) - valorPago));
+		
+		do {
+			System.out.print("*         Valor pago: R$       ");
+			valorPago = entrada.nextDouble();
+			if (valorPago < (totalPedido * descontoAcrescimo)) {
+				System.out.println("O valor pago não pode ser inferior ao valor líquido.");
+			}
+		} while (valorPago < (totalPedido * descontoAcrescimo));
+		
+		System.out.printf("*              Troco: R$ %10.2f\n", (((totalPedido * descontoAcrescimo) - valorPago) * -1));
 	
 		System.out.print("Deseja realmente fechar o pedido? (s/n): ");
 		String fecharPedido = entrada.next();
