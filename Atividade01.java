@@ -71,14 +71,14 @@ public class Atividade01 {
 		double descontoAcrescimo = 0;
 		switch (idPagamento) {
 			case 1:
-				descPagamento = "Dinheiro";
+				descPagamento = "Dinheiro (-5%)";
 				descontoAcrescimo = 0.95;
 				break;
 			case 2:
 				descPagamento = "Cartão de Débito";
 				break;
 			case 3:
-					descPagamento = "Cartão de Crédito";
+					descPagamento = "Cartão de Crédito (+1%)";
 					descontoAcrescimo = 1.01;
 					break;
 			default:
