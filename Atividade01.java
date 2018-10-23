@@ -277,7 +277,9 @@ public class Atividade01 {
 				case 3:
 					clearScreen();
 					int opcaoFormasPagamento = mostrarFormasPagamento();
-					mostrarCaixa(opcaoFormasPagamento);
+					if (opcaoFormasPagamento != 4) {
+						mostrarCaixa(opcaoFormasPagamento);
+					}
 					break;
 				case 4:
 					System.out.println("Saindo do sistema...");
