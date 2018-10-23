@@ -76,6 +76,7 @@ public class Atividade01 {
 				break;
 			case 2:
 				descPagamento = "Cartão de Débito";
+				descontoAcrescimo = 1;
 				break;
 			case 3:
 					descPagamento = "Cartão de Crédito (+1%)";
@@ -117,7 +118,7 @@ public class Atividade01 {
 
 	public static void imprimirPedido(String descPagamento, double totalPedido, double valorPago, double descontoAcrescimo) {
 		try {
-			FileWriter dirArquivo = new FileWriter("totalPedido.txt");
+			FileWriter dirArquivo = new FileWriter("totalPedido.txt", true);
 			PrintWriter arquivo = new PrintWriter(dirArquivo);
 			arquivo.println("\n*************************** RESUMO DO PEDIDO ***************************");
 			arquivo.println("\n************************************************************************");
