@@ -165,12 +165,10 @@ public class Atividade01 {
 	}
 
 	public static void alterarProduto() {
-		listarProdutos();
-
 		System.out.print("Digite o indice do produto a ser alterado: ");
 		int indice = entrada.nextInt() - 1;
-		
-		System.out.println("\nProduto que será alterado");
+
+		System.out.println("\nAlterando o produto:");
 		System.out.println("\n************************************************************************");
 		System.out.println("* Indice | Descrição                      | Vlr. Unitário | Quantidade *");
 		System.out.printf("* %6d | %-30S | R$ %10.2f | %10.2f *\n", indice+1, produtos.get(indice), valorUnitario.get(indice), quantidade.get(indice));
@@ -242,6 +240,8 @@ public class Atividade01 {
 								listarProdutos();
 								break;
 							case 2:
+								clearScreen();
+								listarProdutos();
 								alterarProduto();
 								break;
 							case 3:
