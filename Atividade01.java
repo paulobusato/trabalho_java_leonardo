@@ -100,11 +100,19 @@ public class Atividade01 {
 			System.out.print("\nPressione qualquer tecla para imprimir o comprovante...");
 			entrada.next();
 			imprimirPedido(descPagamento, totalPedido, valorPago, descontoAcrescimo);
+			
+			int quantidadeProdutos = produtos.size(); 
+			for(int i = 0; i < quantidadeProdutos; i++){
+				produtos.remove(0);
+				valorUnitario.remove(0);
+				quantidade.remove(0);
+			}
 		} else {
 			System.out.println("Operação cancelada. O pedido não foi fechado.");
 			System.out.print("\nPressione qualquer tecla para continuar...");
 			entrada.next();
 		}
+
 	}
 
 	public static void imprimirPedido(String descPagamento, double totalPedido, double valorPago, double descontoAcrescimo) {
